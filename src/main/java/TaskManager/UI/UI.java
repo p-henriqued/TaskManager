@@ -33,7 +33,6 @@ public class UI extends JFrame implements ActionListener {
         menuFile.add(itemSave);
         menuPanel.add(menuBar);
 
-
         addTextField_checkBox();
 
         //Buttons settings
@@ -72,6 +71,16 @@ public class UI extends JFrame implements ActionListener {
 
     ////Method to add text field and checkBox.
     public void addTextField_checkBox(){
-
+        JPanel interaction_field = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        checkBox = new JCheckBox();
+        textFields = new ArrayList<>();
+        textFields.add(new JTextField(60));
+        interaction_field.add(checkBox);
+        textFields.forEach(textField -> interaction_field.add(textField));
+        text_checkBoxPanel.add(interaction_field);
+        revalidate();
+        repaint();
     }
+
+
 }
