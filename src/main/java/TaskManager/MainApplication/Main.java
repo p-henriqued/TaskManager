@@ -1,4 +1,4 @@
-package TaskManager;
+package TaskManager.MainApplication;
 
 import TaskManager.UI.UI;
 

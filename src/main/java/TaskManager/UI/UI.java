@@ -11,7 +11,7 @@ public class UI extends JFrame implements ActionListener {
     private JPanel text_checkBoxPanel;
     private JButton addButton, removeButton;
     private JMenuBar menuBar;
-    private JMenuItem itemSave;
+    private JMenuItem itemSave, itemClean;
     private JMenu menuFile;
     private ArrayList<JTextField> textFields;
     private JCheckBox checkBox;
@@ -22,7 +22,8 @@ public class UI extends JFrame implements ActionListener {
         text_checkBoxPanel.setLayout(new GridLayout(0, 1));
 
         //menu bar settings
-        JPanel menuPanel = new JPanel(new BorderLayout());
+        JPanel menuPanel = new JPanel();
+        menuPanel.setLayout(new GridLayout(1, 0));
         menuBar = new JMenuBar();
         menuFile = new JMenu("File");
         menuFile.setMnemonic(KeyEvent.VK_A);
@@ -30,10 +31,16 @@ public class UI extends JFrame implements ActionListener {
         itemSave = new JMenuItem("save");
         itemSave.setMnemonic(KeyEvent.VK_S);
         itemSave.addActionListener(this);
+        itemClean = new JMenuItem("clean");
+        itemClean.setMnemonic(KeyEvent.VK_C);
         menuFile.add(itemSave);
+        menuFile.add(itemClean);
         menuPanel.add(menuBar);
 
-        addTextField_checkBox();
+        //to add fields in the window
+        for(int i=0; i<8; i++){
+            addTextField_checkBox();
+        }
 
         //Buttons settings
         addButton = new JButton("Add");
@@ -63,14 +70,14 @@ public class UI extends JFrame implements ActionListener {
         if(e.getSource() == itemSave){
             //
         }else if(e.getSource() == addButton){
-            //
+            addTextField_checkBox();
         }else if(e.getSource() == removeButton){
-            //
+            removeTextField_checkBox();
         }
     }
 
     ////Method to add text field and checkBox.
-    public void addTextField_checkBox(){
+    private void addTextField_checkBox(){
         JPanel interaction_field = new JPanel(new FlowLayout(FlowLayout.LEFT));
         checkBox = new JCheckBox();
         textFields = new ArrayList<>();
@@ -80,6 +87,15 @@ public class UI extends JFrame implements ActionListener {
         text_checkBoxPanel.add(interaction_field);
         revalidate();
         repaint();
+    }
+    //Method to remove the last text field and checkBox
+    private void removeTextField_checkBox() {
+        Integer component_count = text_checkBoxPanel.getComponentCount();
+        if(component_count > 1){
+            text_checkBoxPanel.remove(component_count - 1);
+            revalidate();
+            repaint();
+        }
     }
 
 
